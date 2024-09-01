@@ -16,17 +16,25 @@ class App:
                 os.system('clear')
 
             if escolha == 1:
+                num_casas = Interface.leia_int('Digite o número de casas: ')
                 agua_escolha = Interface.menu(['Caso a pessoa tenha saído', 'Caso a pessoa não tenha saído', 'Voltar ao menu principal'])
                 if agua_escolha == 1:
-                    self.calculadora.calcular_agua_saiu()
+                    self.calculadora.calcular_agua_saiu(num_casas)
                 elif agua_escolha == 2:
-                    self.calculadora.calcular_agua()
+                    self.calculadora.calcular_agua(num_casas)
                 elif agua_escolha == 3:
                     continue
                 else:
                     print('ERRO! Digite uma opção válida!')
             elif escolha == 2:
-                self.calculadora.calcular_luz_saiu()
+                num_casas = Interface.leia_int('Digite o número de casas: ')
+                luz_escolha = Interface.menu(['Cálculo por Cabeça', 'Voltar ao menu principal'])
+                if luz_escolha == 1:
+                    self.calculadora.calcular_luz_por_cabeca(num_casas)
+                elif luz_escolha == 2:
+                    continue
+                else:
+                    print('ERRO! Digite uma opção válida!')
             elif escolha == 3:
                 Interface.cabecalho('Saindo do Programa')
                 print('Volte Sempre!')

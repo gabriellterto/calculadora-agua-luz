@@ -4,65 +4,81 @@ class Calculadora:
     def __init__(self):
         self.leitura = 30
 
-    def calcular_agua_saiu(self):
+    def calcular_agua_saiu(self, num_casas):
         Interface.cabecalho('MENU ÁGUA')
         valor_agua = Interface.leia_float('Valor total da conta: R$')
         quantidade_total_pessoas = Interface.leia_int('Quantidade total de pessoas no lote: ')
-        pescasa1 = Interface.leia_int('Quantidade de pessoas da Casa 1: ')
-        pescasa2 = Interface.leia_int('Quantidade de pessoas da Casa 2: ')
-        pescasa3 = Interface.leia_int('Quantidade de pessoas da Casa 3: ')
-        leitura_casa1 = Interface.leia_int('Quantidade de dias que ficaram na Casa 1: ')
-        leitura_casa2 = Interface.leia_int('Quantidade de dias que ficaram na Casa 2: ')
-        leitura_casa3 = Interface.leia_int('Quantidade de dias que ficaram na Casa 3: ')
+        
+        pessoas_por_casa = []
+        leitura_por_casa = []
+        valores_por_casa = []
+
+        for i in range(1, num_casas + 1):
+            pescasa = Interface.leia_int(f'Quantidade de pessoas da Casa {i}: ')
+            leitura_casa = Interface.leia_int(f'Quantidade de dias que ficaram na Casa {i}: ')
+            pessoas_por_casa.append(pescasa)
+            leitura_por_casa.append(leitura_casa)
 
         valor_ppessoa = valor_agua / quantidade_total_pessoas
         valor_pdia = valor_ppessoa / self.leitura
-        casa1 = pescasa1 * valor_pdia * leitura_casa1
-        casa2 = pescasa2 * valor_pdia * leitura_casa2
-        casa3 = pescasa3 * valor_pdia * leitura_casa3
+        valor_inquilinos = 0
 
-        valor_inquilinos = casa1 + casa2 + casa3
+        for i in range(num_casas):
+            valor_casa = pessoas_por_casa[i] * valor_pdia * leitura_por_casa[i]
+            valores_por_casa.append(valor_casa)
+            valor_inquilinos += valor_casa
+
         valor_sobrou = (valor_agua - valor_inquilinos) / 2
 
-        if leitura_casa1 == 30:
-            casa1 += valor_sobrou
-        if leitura_casa2 == 30:
-            casa2 += valor_sobrou
-        if leitura_casa3 == 30:
-            casa3 += valor_sobrou
+        for i in range(num_casas):
+            if leitura_por_casa[i] == 30:
+                valores_por_casa[i] += valor_sobrou
 
         Interface.cabecalho('VALOR A SER PAGO')
-        print(f'Casa 1: R${casa1:.2f}')
-        print(f'Casa 2: R${casa2:.2f}')
-        print(f'Casa 3: R${casa3:.2f}')
+        for i in range(num_casas):
+            print(f'Casa {i + 1}: R${valores_por_casa[i]:.2f}')
 
-    def calcular_agua(self):
+    def calcular_agua(self, num_casas):
         Interface.cabecalho('MENU ÁGUA')
         valor_agua = Interface.leia_float('Valor total da conta: R$')
         quantidade_total_pessoas = Interface.leia_int('Quantidade total de pessoas no lote: ')
-        pescasa1 = Interface.leia_int('Quantidade de pessoas da Casa 1: ')
-        pescasa2 = Interface.leia_int('Quantidade de pessoas da Casa 2: ')
-        pescasa3 = Interface.leia_int('Quantidade de pessoas da Casa 3: ')
+        
+        pessoas_por_casa = []
+        valores_por_casa = []
+
+        for i in range(1, num_casas + 1):
+            pescasa = Interface.leia_int(f'Quantidade de pessoas da Casa {i}: ')
+            pessoas_por_casa.append(pescasa)
 
         valor_ppessoa = valor_agua / quantidade_total_pessoas
         valor_pdia = valor_ppessoa / self.leitura
-        casa1 = pescasa1 * valor_pdia * self.leitura
-        casa2 = pescasa2 * valor_pdia * self.leitura
-        casa3 = pescasa3 * valor_pdia * self.leitura
+
+        for i in range(num_casas):
+            valor_casa = pessoas_por_casa[i] * valor_pdia * self.leitura
+            valores_por_casa.append(valor_casa)
 
         Interface.cabecalho('VALOR A SER PAGO')
-        print(f'Casa 1: R${casa1:.2f}')
-        print(f'Casa 2: R${casa2:.2f}')
-        print(f'Casa 3: R${casa3:.2f}')
+        for i in range(num_casas):
+            print(f'Casa {i + 1}: R${valores_por_casa[i]:.2f}')
 
-    def calcular_luz_saiu(self):
+    def calcular_luz_por_cabeca(self, num_casas):
         Interface.cabecalho('MENU LUZ')
-        valor_total = Interface.leia_float('Valor total da luz: R$')
-        quantidade_dias = Interface.leia_int('Quantidade de dias que ficou na casa: ')
-        valor_pdia = valor_total / self.leitura
-        valor_inquilino = valor_pdia * quantidade_dias
-        proprietario = valor_total - valor_inquilino
+        valor_total = Interface.leia_float('Valor total da conta de luz: R$')
+        quantidade_total_pessoas = Interface.leia_int('Quantidade total de pessoas no lote: ')
+
+        pessoas_por_casa = []
+        valores_por_casa = []
+
+        for i in range(1, num_casas + 1):
+            pescasa = Interface.leia_int(f'Quantidade de pessoas da Casa {i}: ')
+            pessoas_por_casa.append(pescasa)
+
+        valor_ppessoa = valor_total / quantidade_total_pessoas
+
+        for i in range(num_casas):
+            valor_casa = pessoas_por_casa[i] * valor_ppessoa
+            valores_por_casa.append(valor_casa)
 
         Interface.cabecalho('VALOR A SER PAGO')
-        print(f'Valor Inquilino: R${valor_inquilino:.2f}')
-        print(f'Proprietário: R${proprietario:.2f}')
+        for i in range(num_casas):
+            print(f'Casa {i + 1}: R${valores_por_casa[i]:.2f}')
