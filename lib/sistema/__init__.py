@@ -16,11 +16,15 @@ class Calculadora:
         for i in range(1, num_casas + 1):
             pescasa = Interface.leia_int(f'Quantidade de pessoas da Casa {i}: ')
             pessoas_por_casa.append(pescasa)
+        
+        print('-' * 40)
 
         # Lê a quantidade de dias que cada casa ficou
         for i in range(1, num_casas + 1):
             leitura_casa = Interface.leia_int(f'Quantidade de dias que ficaram na Casa {i}: ')
             leitura_por_casa.append(leitura_casa)
+
+        print('-' * 40)
 
         # Calcula a quantidade total de pessoas
         quantidade_total_pessoas = sum(pessoas_por_casa)
@@ -53,6 +57,7 @@ class Calculadora:
 
         # Lê a quantidade de pessoas de cada casa
         for i in range(1, num_casas + 1):
+            print('-' * 40)
             pescasa = Interface.leia_int(f'Quantidade de pessoas da Casa {i}: ')
             pessoas_por_casa.append(pescasa)
 

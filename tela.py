@@ -16,7 +16,13 @@ class App:
                 os.system('clear')
 
             if escolha == 1:
+                if os.name == "nt":
+                    os.system('cls')
+                else:
+                    os.system('clear')
+                print('-' * 40)
                 num_casas = Interface.leia_int('Digite o número de casas: ')
+                print('-' * 40)
                 agua_escolha = Interface.menu(['Caso a pessoa tenha saído', 'Caso a pessoa não tenha saído', 'Voltar ao menu principal'])
                 if agua_escolha == 1:
                     self.calculadora.calcular_agua_saiu(num_casas)
