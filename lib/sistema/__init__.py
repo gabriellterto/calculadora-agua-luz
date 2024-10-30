@@ -40,9 +40,11 @@ class Calculadora:
 
         valor_sobrou = valor_agua - valor_inquilinos
 
-        for i in range(num_casas):
-            if leitura_por_casa[i] < 30:
-                valores_por_casa[i] += (valor_sobrou / sum(leitura_por_casa) * leitura_por_casa[i])
+        # Soma as leituras das casas que ficaram 30 dias
+        casas_completas = [i for i in range(num_casas) if leitura_por_casa[i] == 30]
+
+        for i in casas_completas:
+            valores_por_casa[i] += (valor_sobrou / len(casas_completas))
 
         Interface.cabecalho('VALOR A SER PAGO')
         for i in range(num_casas):
